@@ -41,11 +41,11 @@ CC_SRCS = $(foreach dir, $(DIRS), $(wildcard $(dir)/*.cc))
 C_SRCS = $(foreach dir, $(DIRS), $(wildcard $(dir)/*.c))
 OBJS = $(patsubst %.cpp,%.o,$(CPP_SRCS)) $(patsubst %.c,%.o,$(C_SRCS)) $(patsubst %.cc,%.o,$(CC_SRCS))
 
-TARGET = Logic
+TARGET = Logger
 
 all: $(TARGET)
 	
-Logic: $(OBJS)
+Logger: $(OBJS)
 	$(CXX) $(CXXFLAG) $(DEFINE_SERVER) -o $@ $(OBJS) $(LDFLAGS) $(INC)
 	mkdir -p $(LOGIC_PATH)/bin	
 	cp -f $@ $(LOGIC_PATH)/bin/

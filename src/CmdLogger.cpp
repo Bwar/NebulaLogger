@@ -76,13 +76,13 @@ bool CmdLogger::AnyMessage(
     if (oTraceLog.node_identify() == oMsgBody.req_target().route())     // no trace_id
     {
         m_ofs << oTraceLog.node_identify() << "|" << std::put_time(std::localtime(&t), "%Y%m%d%H%M%S") << "|"
-            << oTraceLog.code_file_name() << ":" << oTraceLog.code_file_line << "|"
+            << oTraceLog.code_file_name() << ":" << oTraceLog.code_file_line() << "|"
             << oTraceLog.code_function() << "|" << oTraceLog.log_content() << "\n";
     }
     else
     {
         m_ofs << oTraceLog.node_identify() << "|" << std::put_time(std::localtime(&t), "%Y%m%d%H%M%S") << "|"
-            << oTraceLog.code_file_name() << ":" << oTraceLog.code_file_line << "|"
+            << oTraceLog.code_file_name() << ":" << oTraceLog.code_file_line() << "|"
             << oTraceLog.code_function() << "|" << oTraceLog.log_content() << "|"
             << oMsgBody.req_target().route() << "\n";
     }
