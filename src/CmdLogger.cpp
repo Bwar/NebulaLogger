@@ -60,6 +60,7 @@ bool CmdLogger::AnyMessage(
                 std::shared_ptr<neb::SocketChannel> pChannel, 
                 const MsgHead& oMsgHead, const MsgBody& oMsgBody)
 {
+    LOG4_DEBUG("cmd %d, seq %u", oMsgHead.cmd(), oMsgHead.seq());
     if (!OpenDataFile())
     {
         return(false);
@@ -75,16 +76,20 @@ bool CmdLogger::AnyMessage(
     auto t = std::chrono::system_clock::to_time_t(time_now);
     if (oTraceLog.node_identify() == oMsgBody.req_target().route())     // no trace_id
     {
-        m_ofs << oTraceLog.node_identify() << "|" << std::put_time(std::localtime(&t), "%Y%m%d%H%M%S") << "|"
+        m_ofs << oTraceLog.node_type() << "|" << oTraceLog.node_identify() << "|"
+            << std::put_time(std::localtime(&t), "%Y%m%d%H%M%S") << "|"
+            << oTraceLog.log_level() << "|"
             << oTraceLog.code_file_name() << ":" << oTraceLog.code_file_line() << "|"
-            << oTraceLog.code_function() << "|" << oTraceLog.log_content() << "\n";
+            << oTraceLog.code_function() << "|" << oTraceLog.log_content() << "|" << "\r\n";
     }
     else
     {
-        m_ofs << oTraceLog.node_identify() << "|" << std::put_time(std::localtime(&t), "%Y%m%d%H%M%S") << "|"
+        m_ofs << oTraceLog.node_type() << "|" << oTraceLog.node_identify() << "|"
+            << std::put_time(std::localtime(&t), "%Y%m%d%H%M%S") << "|"
+            << oTraceLog.log_level() << "|"
             << oTraceLog.code_file_name() << ":" << oTraceLog.code_file_line() << "|"
             << oTraceLog.code_function() << "|" << oTraceLog.log_content() << "|"
-            << oMsgBody.req_target().route() << "\n";
+            << oMsgBody.req_target().route() << "\r\n";
     }
     return(true);
 }

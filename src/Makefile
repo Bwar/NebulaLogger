@@ -31,7 +31,6 @@ INC := $(INC) \
 LDFLAGS := $(LDFLAGS) -D_LINUX_OS_ \
            -L$(NEBULA_PATH)/lib -lnebula \
            -L$(LIB3RD_PATH)/lib -lhiredis \
-		   -L$(LIB3RD_PATH)/lib -lssl \
            -L$(LIB3RD_PATH)/lib -lcryptopp \
            -L$(LIB3RD_PATH)/lib -lprotobuf \
            -L$(LIB3RD_PATH)/lib -lev \

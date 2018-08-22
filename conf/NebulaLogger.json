@@ -1,9 +1,9 @@
 {
     "node_type": "LOGGER",
     "//host": "系统内各Server之间通信绑定的IP（Server to Server）",
-    "host": "192.168.157.138",
+    "host": "192.168.157.157",
     "//port": "系统内各Server之间通信监听的端口",
-    "port": 16011,
+    "port": 16050,
     "//server_name": "异步事件驱动Server",
     "server_name": "neb_Logger",
     "//process_num": "进程数量",
@@ -27,29 +27,23 @@
     "net_log_level": 6,
     "//beacon": "控制中心",
     "beacon": [
-        { "host": "192.168.157.138", "port":16000 }
+        { "host": "192.168.157.157", "port": "16000" }
     ],
     "boot_load": {
-        "cmd": [],
+        "cmd": [
+            { "cmd": 33, "class": "logger::CmdLogger" }
+        ],
         "module": []
     },
     "//refresh_interval": "刷新Server配置，检查、加载插件动态库时间周期（周期时间长短视服务器忙闲而定）",
     "refresh_interval": 60,
-    "dynamic_loading": [{
-        "so_path": "plugins/logic/Hello.so",
-        "load": true,
-        "version": 1,
-        "cmd": [
-            { "cmd": 65531, "class": "logic::CmdHello" }
-        ],
-        "module": []
-    }],
+    "dynamic_loading": [],
     "//custom": "自定义配置，用于通过框架层带给业务",
     "custom": {
-        "log_data": {
-            "data_path": "data",
-            "data_file_name": "log_data",
-            "data_file_size": 40960000
+        "log_data":{
+            "data":"data",
+            "log_data":"distribute_log",
+            "data_file_size":1024000
         }
     }
 }
