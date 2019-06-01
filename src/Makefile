@@ -1,7 +1,7 @@
 CC = gcc-6
 CXX = g++-6
 CFLAGS = -g -O2 -fPIC 
-CXXFLAG =  -std=c++14 -O2 -Wall -ggdb -m64 -D_GNU_SOURCE=1 -D_REENTRANT -D__GUNC__ -fPIC -DNODE_BEAT=10.0 
+CXXFLAG =  -std=c++14 -O2 -Wall -Wno-unused-function -ggdb -m64 -D_GNU_SOURCE=1 -D_REENTRANT -D__GUNC__ -fPIC -DNODE_BEAT=10.0 
 
 ARCH:=$(shell uname -m)
 
