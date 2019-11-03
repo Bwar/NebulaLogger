@@ -13,6 +13,7 @@
 #include <string>
 #include <fstream>
 #include <actor/cmd/Cmd.hpp>
+#include <unistd.h>
 
 namespace logger
 {

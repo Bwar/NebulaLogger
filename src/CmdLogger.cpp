@@ -74,10 +74,14 @@ bool CmdLogger::AnyMessage(
     }
     auto time_now = std::chrono::system_clock::now();
     auto t = std::chrono::system_clock::to_time_t(time_now);
+    char formatTime[64] = {0};
+    
+    strftime(formatTime, sizeof(formatTime), "%Y%m%d%H%M%S",std::localtime(&t));
+
     if (oTraceLog.node_identify() == oMsgBody.req_target().route())     // no trace_id
     {
         m_ofs << oTraceLog.node_type() << "|" << oTraceLog.node_identify() << "|"
-            << std::put_time(std::localtime(&t), "%Y%m%d%H%M%S") << "|"
+            << formatTime << "|"
             << oTraceLog.log_level() << "|"
             << oTraceLog.code_file_name() << ":" << oTraceLog.code_file_line() << "|"
             << oTraceLog.code_function() << "|" << oTraceLog.log_content() << "|" << "\r\n";
@@ -85,7 +89,7 @@ bool CmdLogger::AnyMessage(
     else
     {
         m_ofs << oTraceLog.node_type() << "|" << oTraceLog.node_identify() << "|"
-            << std::put_time(std::localtime(&t), "%Y%m%d%H%M%S") << "|"
+            << formatTime << "|"
             << oTraceLog.log_level() << "|"
             << oTraceLog.code_file_name() << ":" << oTraceLog.code_file_line() << "|"
             << oTraceLog.code_function() << "|" << oTraceLog.log_content() << "|"
@@ -107,8 +111,12 @@ bool CmdLogger::OpenDataFile()
     }
     auto time_now = std::chrono::system_clock::now();
     auto t = std::chrono::system_clock::to_time_t(time_now);
+    char formatTime[64] = {0};
+    
+    strftime(formatTime, sizeof(formatTime), "%Y%m%d%H%M%S",std::localtime(&t));
+
     std::ostringstream osDataFile;
-    osDataFile << m_strLogDataPath << "/" << m_strLogFileName << "." << std::put_time(std::localtime(&t), "%Y%m%d%H%M%S");
+    osDataFile << m_strLogDataPath << "/" << m_strLogFileName << "." << formatTime ;
     m_strLogDataFile = osDataFile.str();
     m_ofs.open(m_strLogDataFile, std::ios::app);
     if (!m_ofs.good())
