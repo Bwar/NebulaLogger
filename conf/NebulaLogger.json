@@ -31,17 +31,21 @@
     "beacon": [
         { "host": "192.168.157.157", "port": "16000" }
     ],
-    "boot_load": {
-        "cmd": [
-            { "cmd": 33, "class": "logger::CmdLogger" }
-        ],
-        "module": [],
-        "session":[],
-        "step":[]
-    },
     "//refresh_interval": "刷新Server配置，检查、加载插件动态库时间周期（周期时间长短视服务器忙闲而定）",
     "refresh_interval": 60,
-    "dynamic_loading": [],
+    "load_config":{
+        "worker":{
+            "boot_load":{
+                "cmd":[{ "cmd": 401, "class": "logger::CmdLogger" }],
+                "module":[
+                 ],
+                 "session":[],
+                 "step":[]
+            },
+            "dynamic_loading":[
+            ]
+        }
+    },
     "//custom": "自定义配置，用于通过框架层带给业务",
     "custom": {
         "log_data":{
